@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dndManager">
+  <head>
+    <meta charset="utf-8">
+    <title>Character Creation</title>
+    <meta name="description" content="Mangae your DnD chracter">
+    <meta name="author" content="Ben Baird">
+    <!-- <link rel="stylesheet" href="#"> -->
+    </head>
+
+    <!-- Scripts and other includes -->
+    <div>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-touch.min.js"></script> -->
+      <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script> -->
+      <script type="text/javascript" src="/client/controllers/home.js"></script>
+      <script type="text/javascript" src="/client/ui-bootstrap-tpls-1.3.3.min.js"></script>
+    </div>
+
+
+    <body ng-controller="ManagerController" >
+      <div class="container">
+        <div class="btn-group btn-group-justified" ng-repeat="class in classes track by $index">
+          <div class="btn-group">
+            <button class="btn btn-primary">{{class}}</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="name">Character Name:</label>
+            </div>
+          </div> <!-- end row -->
+          <div class="row">
+            <div class="col-lg-12">
+              <input class="form-control" type="text" id="name" value="{{charName}}">
+            </div>
+          </div> <!-- end row -->
+        </div>
+
+        <!-- Character Stats -->
+        <div ng-repeat="stat in stats">
+          <div class="row">
+
+            <div class="col-xs-4">
+              <p>{{stat.name}}</p>
+            </div>
+
+            <div class="col-xs-1">
+              <button class="btn btn-default">-</button>
+            </div>
+
+            <div class="col-xs-4">
+              <input style="text-align:center" type="text" id="{{atr.name}}In" value="0" ng-model="in">
+            </div>
+
+            <div class="col-xs-1">
+              <button class="btn btn-default">+</button>
+            </div>
+          </div> <!-- end row -->
+        </div>
+
+        <input ng-model="notes" value={{notes}}>
+        <button class="btn btn-primary" ng-click="saveChar()">Save</button>
+      </div>
+    </body>
+</html>
