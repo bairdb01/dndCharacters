@@ -37,13 +37,20 @@ app.controller("ManagerController", ["$scope", "$resource",
       "stats" : $scope.stats
     }
 
+    // Load any previous characters from the database
+    Character.query(function(results){
+      $scope.chars = results;
+      $scope.character = $scope.chars[0];
+      console.log($scope.character);
+    });
+
     // Save the character to the database
     $scope.saveChar = function(){
       var char = new Character($scope.character);
       console.log(JSON.stringify(char));
       char.$save(function(result){
         console.log("Saved " + JSON.stringify(result));
-      })
+      });
     };
   }
 ]);

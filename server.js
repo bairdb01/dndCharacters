@@ -18,7 +18,7 @@ app.get("/home", function(req, res){
 });
 
 //API Requests
-// app.get("/api/character", charCtrl.grabChars)
+app.get("/api/character", charCtrl.listChars)
 app.post("/api/character", charCtrl.createChar);
 
 // Listen on a port
