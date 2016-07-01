@@ -1,70 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="dndManager">
+<html lang="en" >
   <head>
     <meta charset="utf-8">
     <title>Character Creation</title>
     <meta name="description" content="Mangae your DnD chracter">
     <meta name="author" content="Ben Baird">
-    <!-- <link rel="stylesheet" href="#"> -->
-    </head>
+  </head>
 
-    <!-- Scripts and other includes -->
-    <div>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-      <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-touch.min.js"></script> -->
-      <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script> -->
-      <script type="text/javascript" src="/client/controllers/home.js"></script>
-      <script type="text/javascript" src="/client/ui-bootstrap-tpls-1.3.3.min.js"></script>
-    </div>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
 
+  <body ng-app="dndManager" ng-cloak>
+    <div ng-controller="ManagerController" >
+      <form role="form">
+        <div layout="row">
+          <md-content layout-padding>
+            <md-input-container>
+              <label>Character Name:</label>
+              <input ng-model="character.name">
+            </md-input-container>
+            <md-input-container>
+              <label>Class</label>
+              <md-select ng-model="character.class">
+                <md-option ng-repeat="class in classes" value="{{class}}">{{class}}</md-option>
+              </md-select>
+            </md-input-container>
+          </md-content>
+        </div>
 
-    <body ng-controller="ManagerController" >
-      <div class="container">
-        <div class="btn-group btn-group-justified" ng-repeat="class in classes track by $index">
-          <div class="btn-group">
-            <button class="btn btn-primary">{{class}}</button>
+        <div class="character">
+          <img class="img-responsive" style="float:left; margin:10px; display: inline-block" src="http://place-hold.it/300x500"/>
+
+          <!-- Character Stats -->
+          <div style="float:left">
+            <!-- Stat attributes -->
+            <div ng-repeat="stat in character.stats">
+              <div layout-gt-xs="row">
+                <div >
+                  <p>{{stat.name}}</p>
+                </div>
+              </div>
+              <md-button class="md-raised">-</md-button>
+              <input style="text-align:center" ng-model="stat.value">
+              <md-button class="md-raised">+</md-button>
+            </div>
+
+            <!-- Notes -->
+            <md-input-container class="md-block">
+              <label>Notes</label>
+              <textarea ng-model="character.notes" rows="5"></textarea>
+            </md-input-container>
+            <button class="btn btn-primary" type="submit" ng-click="saveChar()">Save</button>
           </div>
         </div>
-
-        <div class="form-group">
-          <div class="row">
-            <div class="col-sm-4">
-              <label for="name">Character Name:</label>
-            </div>
-          </div> <!-- end row -->
-          <div class="row">
-            <div class="col-lg-12">
-              <input class="form-control" type="text" id="name" value="{{charName}}">
-            </div>
-          </div> <!-- end row -->
-        </div>
-
-        <!-- Character Stats -->
-        <div ng-repeat="stat in stats">
-          <div class="row">
-
-            <div class="col-xs-4">
-              <p>{{stat.name}}</p>
-            </div>
-
-            <div class="col-xs-1">
-              <button class="btn btn-default">-</button>
-            </div>
-
-            <div class="col-xs-4">
-              <input style="text-align:center" type="text" id="{{atr.name}}In" value="0" ng-model="in">
-            </div>
-
-            <div class="col-xs-1">
-              <button class="btn btn-default">+</button>
-            </div>
-          </div> <!-- end row -->
-        </div>
-
-        <input ng-model="notes" value={{notes}}>
-        <button class="btn btn-primary" ng-click="saveChar()">Save</button>
+      </form>
       </div>
-    </body>
+  </body>
+
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+  <script type="text/javascript" src="/client/controllers/charCtrl.js"></script>
+
 </html>
