@@ -18,3 +18,11 @@ module.exports.listChars = function(req, res){
     res.json(results);
   })
 };
+
+module.exports.updateChar = function(req, res){
+  Character.update({name: {$eq : req.body.name}}, req.body, function(err, raw){
+    if (err) throw err;
+    //raw JSON {ok : 0/1, nModified : Number, n : #}
+    res.json(raw);
+  })
+};
